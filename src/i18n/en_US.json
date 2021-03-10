@@ -1,0 +1,58 @@
+{
+  "components": {
+    "basic": {
+      "title": "Basic Field"
+    },
+    "advance": {
+      "title": "Advance Field"
+    },
+    "layout": {
+      "title": "Layout Field"
+    },
+    "fields": {
+      "input": "Input",
+      "textarea": "Textarea",
+      "number": "Number",
+      "radio": "Radio",
+      "checkbox": "Checkbox",
+      "time": "Time",
+      "date": "Date",
+      "rate": "Rate",
+      "color": "Color",
+      "select": "Select",
+      "switch": "Switch",
+      "slider": "Slider",
+      "text": "Text",
+      "blank": "Custom",
+      "fileupload": "File",
+      "imgupload": "Image",
+      "editor": "Editor",
+      "cascader": "Cascader",
+      "table": "Sub-table",
+      "grid": "Grid",
+      "tabs": "Tabs",
+      "divider": "Divider",
+      "html": "HTML",
+      "component": "Component"
+    }
+  },
+  "actions": {
+    "import": "Import JSON",
+    "clear": "Clear",
+    "preview": "Preview",
+    "json": "Generate JSON",
+    "code": "Generate Code",
+    "getData": "Get Data",
+    "reset": "Reset",
+    "copyData": "Copy",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "addOption": "Add Option",
+    "addColumn": "Add Column",
+    "addTab": "Add Tab",
+    "upload": "Upload",
+    "add": "Add",
+    "undo": "Undo",
+    "redo": "Redo"
+  }
+}
