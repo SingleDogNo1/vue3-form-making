@@ -6,6 +6,8 @@
     {{$t('actions.add')}}
 
     <el-button type="primary">adlak;</el-button>
+    <br />
+    <button type="primary" class="h-32 block mx-auto bg-blue-600 bg-opacity-100">1111</button>
   </div>
 </template>
 
