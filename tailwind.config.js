@@ -4,7 +4,8 @@ module.exports = {
   theme: {
     colors: {
       border: '#e0e0e0',
-      background: '#F4F6FC'
+      background: '#f4f6fc',
+      placeholder: '#cccccc'
     },
     widgetMenu: {
       height: '26px'

@@ -76,13 +76,7 @@
     <el-container direction="vertical" class="border-l border-r border-border">
       <header class="h-11 pl-4 pr-4 border-b border-border text-right">
         <slot name="action"></slot>
-        <el-button
-          class="ml-2"
-          type="text"
-          :disabled="!undo"
-          icon="el-icon-back"
-          @click="handleUndo"
-        >
+        <el-button type="text" :disabled="!undo" icon="el-icon-back" @click="handleUndo">
           {{ $t('actions.undo') }}
         </el-button>
         <el-button type="text" :disabled="!redo" icon="el-icon-right" @click="handleRedo">
@@ -114,7 +108,9 @@
           {{ $t('actions.code') }}
         </el-button>
       </header>
-      <el-container :class="{ empty: widgetForm.list.length === 0 }"> hello,world </el-container>
+      <el-container :class="{ empty: widgetForm.list.length === 0 }">
+        <widget-form :data="widgetForm" />
+      </el-container>
     </el-container>
     <el-aside width="250px">
       <header class="h-11 border-b border-border flex">
@@ -146,6 +142,7 @@ import { defineComponent, reactive, toRefs, ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { basicWidgets, layoutWidgets, advanceWidgets } from './widgetsConfig'
 import type { Widget, FormConfig } from './types'
+import WidgetForm from './components/WidgetForm.vue'
 
 interface State {
   basicWidgets: Widget[]
@@ -180,6 +177,9 @@ export default defineComponent({
       type: Boolean,
       default: true
     }
+  },
+  components: {
+    WidgetForm
   },
   setup(props, ctx) {
     const { t } = useI18n()
