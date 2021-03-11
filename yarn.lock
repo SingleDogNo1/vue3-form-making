@@ -1760,6 +1760,11 @@ slice-ansi@^4.0.0:
     astral-regex "^2.0.0"
     is-fullwidth-code-point "^3.0.0"
 
+sortablejs@1.10.2:
+  version "1.10.2"
+  resolved "https://registry.npm.taobao.org/sortablejs/download/sortablejs-1.10.2.tgz#6e40364d913f98b85a14f6678f92b5c1221f5290"
+  integrity sha1-bkA2TZE/mLhaFPZnj5K1wSIfUpA=
+
 source-map@0.6.1, source-map@^0.6.1:
   version "0.6.1"
   resolved "https://registry.npm.taobao.org/source-map/download/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
@@ -1980,6 +1985,13 @@ vue@^3.0.5:
     "@vue/compiler-dom" "3.0.7"
     "@vue/runtime-dom" "3.0.7"
     "@vue/shared" "3.0.7"
+
+vuedraggable@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.npm.taobao.org/vuedraggable/download/vuedraggable-4.0.1.tgz#3bcaab0808b7944030b7d9a29f9a63d59dfa12c5"
+  integrity sha1-O8qrCAi3lEAwt9min5pj1Z36EsU=
+  dependencies:
+    sortablejs "1.10.2"
 
 vuex-persistedstate@^4.0.0-beta.3:
   version "4.0.0-beta.3"

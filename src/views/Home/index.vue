@@ -1,25 +1,16 @@
 <template>
-  <div class="home">
-    <div>{{ msg }}</div>
-    <button @click="add">{{ num }}</button>
-    <hello-world msg="13213213" />
-    {{$t('actions.add')}}
-
-    <el-button type="primary">adlak;</el-button>
-    <br />
-    <button type="primary" class="h-32 block mx-auto bg-blue-600 bg-opacity-100">1111</button>
-  </div>
+  <create-form />
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, reactive, toRefs } from 'vue'
 import { useStore } from '@/store'
-import HelloWorld from '@/components/HelloWorld.vue'
+import CreateForm from '@/components/CreateForm/index.vue'
 
 export default defineComponent({
   name: 'home',
   components: {
-    HelloWorld
+    CreateForm
   },
   setup(props, ctx) {
     const store = useStore()

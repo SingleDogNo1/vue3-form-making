@@ -12,5 +12,12 @@ export default defineConfig({
         replacement: resolve(__dirname, 'src') + '/'
       }
     ]
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import './src/assets/scss/variables.scss';`
+      }
+    }
   }
 })
