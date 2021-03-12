@@ -180,6 +180,8 @@ export interface GridColumns {
 }
 
 export interface Widget {
+  /*** 控件唯一标识 */
+  key?: string
   /*** 控件类型 */
   type: string
   /*** 左侧控件列表显示的控件图标 */
@@ -189,11 +191,13 @@ export interface Widget {
   /*** 子表单数据结构 */
   tableColumns?: any[]
   tabs?: { label: string; name: string; list: any[] }[]
+  // 默认的规则
+  rules?: any[]
   options: WidgetOptions
 }
 
 export interface FormConfig {
-  list: any[] // TODO list 类
+  list: Widget[] // TODO list 类
   config: {
     labelWidth: number
     labelPosition: 'left' | 'right' | 'top'
