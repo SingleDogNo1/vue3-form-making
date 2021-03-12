@@ -138,7 +138,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, ref, computed } from 'vue'
+import { defineComponent, reactive, toRefs, getCurrentInstance, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { basicWidgets, layoutWidgets, advanceWidgets } from './widgetsConfig'
 import type { Widget, FormConfig } from './types'
@@ -183,6 +183,8 @@ export default defineComponent({
   },
   setup(props, ctx) {
     const { t } = useI18n()
+    const emitter = getCurrentInstance()?.appContext.config.globalProperties.emitter
+
     const state = reactive<State>({
       basicWidgets: [],
       layoutWidgets: [],
@@ -219,7 +221,8 @@ export default defineComponent({
     }
 
     function handleField(element: Widget) {
-      console.log('element :>> ', element)
+      console.log('element :>> ', element);
+      emitter.emit('on-field-add', element)
     }
 
     function handleUndo() {
