@@ -40,11 +40,15 @@
             <span>{{ index }}</span>
           </div>
 
-          <div v-else-if="element.type === 'grid'">
-            <span>grid</span>
-            <span>{{ element }}</span>
-            <span>{{ index }}</span>
-          </div>
+          <widget-form-item
+            v-else-if="element.type !== 'grid'"
+            :key="element.key"
+            :element="element"
+            :select="selectWidget"
+            :index="index"
+            :data="data"
+            @select-change="handleSelectChange"
+          />
 
           <div v-else>
             <span class="drag-widget">other</span>
@@ -61,14 +65,18 @@
 import { defineComponent, reactive, toRefs, getCurrentInstance, onMounted, nextTick } from 'vue'
 import { cloneDeep } from 'lodash'
 import { useI18n } from 'vue-i18n'
-import type { Widget, FormConfig } from '../types'
+import type { Widget, Form } from '../types'
+import WidgetFormItem from './WidgetFormItem.vue'
 
 interface State {
-  selectWidget: Widget | null
+  selectWidget: Widget | {}
 }
 
 export default defineComponent({
   name: 'widgetFormContainer',
+  components: {
+    WidgetFormItem
+  },
   props: {
     data: {
       type: Object,
@@ -87,10 +95,8 @@ export default defineComponent({
     // element-ui 定义全局 $message
     const message = getCurrentInstance()?.appContext.config.globalProperties.$message
 
-    message.warning('123131')
-
     const state = reactive<State>({
-      selectWidget: null
+      selectWidget: {}
     })
 
     state.selectWidget = props.select as Widget
@@ -122,14 +128,14 @@ export default defineComponent({
       })
     }
 
-    function addWidget(list: FormConfig['list'], widget: Widget, isTable: boolean = false) {
+    function addWidget(list: Form['list'], widget: Widget, isTable: boolean = false) {
       if (isTable && ['grid', 'table', 'tabs', 'divider'].includes(widget.type)) {
         message.warning(t('message.noPut'))
         return false
       }
 
-      if (state.selectWidget?.key) {
-        const index = list.findIndex(item => item.key == state.selectWidget?.key)
+      if ((state.selectWidget as Widget)?.key) {
+        const index = list.findIndex(item => item.key == (state.selectWidget as Widget)?.key)
         if (index >= 0) {
           list.splice(index + 1, 0, widget)
           state.selectWidget = list[index + 1]
@@ -162,6 +168,11 @@ export default defineComponent({
       nextTick(() => {
         emitter.emit('on-history-add')
       })
+    }
+
+    function handleSelectChange(index: number) {
+      console.log('select-change', index)
+      index >= 0 ? (state.selectWidget = props.data.list[index]) : (state.selectWidget = {})
     }
 
     onMounted(() => {
@@ -199,7 +210,8 @@ export default defineComponent({
     return {
       ...toRefs(state),
       handleWidgetAdd,
-      handleWidgetUpdate
+      handleWidgetUpdate,
+      handleSelectChange
     }
   }
 })

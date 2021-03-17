@@ -109,7 +109,7 @@
         </el-button>
       </header>
       <el-container :class="{ empty: widgetForm.list.length === 0 }">
-        <widget-form :data="widgetForm" />
+        <widget-form :data="widgetForm" :select="widgetFormSelect" />
       </el-container>
     </el-container>
     <el-aside width="250px">
@@ -130,8 +130,12 @@
         </div>
       </header>
       <el-container>
-        <div v-show="configTab === 'widget'">widget</div>
-        <div v-show="configTab === 'form'">form</div>
+        <widget-config
+          v-show="configTab === 'widget'"
+          :data="widgetFormSelect"
+          :key="widgetFormSelect ? widgetFormSelect.key : 0"
+        />
+        <form-config v-show="configTab === 'form'" :data="widgetForm.config" />
       </el-container>
     </el-aside>
   </el-container>
@@ -141,8 +145,10 @@
 import { defineComponent, reactive, toRefs, getCurrentInstance, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { basicWidgets, layoutWidgets, advanceWidgets } from './widgetsConfig'
-import type { Widget, FormConfig } from './types'
+import type { Widget, Form } from './types'
 import WidgetForm from './components/WidgetForm.vue'
+import WidgetConfig from './components/WidgetConfig.vue'
+import FormConfig from './components/FormConfig.vue'
 
 interface State {
   basicWidgets: Widget[]
@@ -150,8 +156,9 @@ interface State {
   advanceWidgets: Widget[]
   undo: boolean
   redo: boolean
-  widgetForm: FormConfig
+  widgetForm: Form
   configTab: 'widget' | 'form'
+  widgetFormSelect: any
 }
 
 export default defineComponent({
@@ -179,7 +186,9 @@ export default defineComponent({
     }
   },
   components: {
-    WidgetForm
+    WidgetForm,
+    WidgetConfig,
+    FormConfig
   },
   setup(props, ctx) {
     const { t } = useI18n()
@@ -198,11 +207,13 @@ export default defineComponent({
           labelPosition: 'right',
           size: 'small',
           customClass: '',
+          layout: 'horizontal',
           labelCol: 3,
           width: '100%'
         }
       },
-      configTab: 'widget'
+      configTab: 'widget',
+      widgetFormSelect: null
     })
 
     function reloadComponents() {
@@ -221,7 +232,7 @@ export default defineComponent({
     }
 
     function handleField(element: Widget) {
-      console.log('element :>> ', element);
+      console.log('element :>> ', element)
       emitter.emit('on-field-add', element)
     }
 
@@ -251,6 +262,10 @@ export default defineComponent({
     }
 
     reloadComponents()
+
+    onMounted(() => {
+
+    })
     return {
       ...toRefs(state),
       handleField,

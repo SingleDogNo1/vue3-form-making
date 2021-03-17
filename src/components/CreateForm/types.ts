@@ -196,12 +196,13 @@ export interface Widget {
   options: WidgetOptions
 }
 
-export interface FormConfig {
+export interface Form {
   list: Widget[] // TODO list 类
   config: {
     labelWidth: number
     labelPosition: 'left' | 'right' | 'top'
     size: 'medium' | 'small' | 'mini'
+    layout: 'horizontal' | 'vertical'
     customClass: string
     labelCol: number
     width: string
